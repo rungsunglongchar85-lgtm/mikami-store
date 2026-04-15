@@ -1,0 +1,24 @@
+<h2>Login</h2>
+<input id="email" placeholder="email">
+<input id="pass" placeholder="password">
+<button onclick="login()">Login</button>
+
+<script>
+  function login() {
+    fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.value,
+          password: pass.value
+        })
+      })
+      .then(r => r.json())
+      .then(d => {
+        if (d.token) {
+          localStorage.setItem('token', d.token)
+          location.href = '/user.html'
+        } else alert(d.error)
+      })
+  }
+</script> 

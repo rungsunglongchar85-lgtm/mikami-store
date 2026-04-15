@@ -1,0 +1,24 @@
+<h2>Register</h2>
+<input id="email">
+<input id="pass">
+<button onclick="reg()">Register</button>
+
+<script>
+  function reg() {
+    fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.value,
+          password: pass.value
+        })
+      })
+      .then(r => r.json())
+      .then(d => {
+        if (d.token) {
+          localStorage.token = d.token
+          location.href = '/user.html'
+        } else alert(d.error)
+      })
+  }
+</script>

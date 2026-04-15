@@ -1,0 +1,15 @@
+<h2>User</h2>
+<button onclick="load()">Load Products</button>
+<div id="d"></div>
+
+<script>
+  if (!localStorage.token) location = '/login.html'
+  
+  function load() {
+    fetch('/api/products')
+      .then(r => r.json())
+      .then(x => {
+        d.innerHTML = JSON.stringify(x)
+      })
+  }
+</script>
